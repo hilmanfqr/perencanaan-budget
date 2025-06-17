@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Costonomy</title>
+    <style>
+        :root {
+            --primary-color: #6a1b9a;
+            --primary-light: #9c4dcc;
+            --primary-dark: #38006b;
+            --white: #ffffff;
+            --gray-light: #f5f5f5;
+            --gray: #e0e0e0;
+            --text-dark: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f0f0;
+            color: var(--text-dark);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--gray);
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-link:hover {
+            background-color: var(--gray-light);
+        }
+        
+        .nav-link.active {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .card-wide {
+            max-width: 800px;
+        }
+        
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--text-dark);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--gray);
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--gray-light);
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-20 {
+            margin-top: 20px;
+        }
+        
+        .form-footer {
+            margin-top: 20px;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .form-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .otp-inputs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .otp-input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 20px;
+            border: 1px solid var(--gray);
+            border-radius: 4px;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .dashboard-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        
+        .dashboard-btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-bottom: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dashboard-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .budget-form {
+            width: 100%;
+        }
+        
+        .budget-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr 80px;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .budget-row label {
+            font-size: 14px;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 28px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: var(--primary-color);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(32px);
+        }
+        
+        .chart-container {
+            width: 100%;
+            height: 300px;
+            position: relative;
+        }
+        
+        .donut-chart {
+            width: 250px;
+            height: 250px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        /* Simulating chart without actually implementing it */
+        .chart-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--gray-light);
+            border-radius: 8px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .budget-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .budget-table th, .budget-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--gray);
+        }
+        
+        .budget-table th {
+            font-weight: 600;
+            color: #666;
+        }
+        
+        .tab-container {
+            margin-bottom: 20px;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            background-color: var(--gray-light);
+        }
+        
+        .tab.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Page specific styles */
+        #app {
+            display: none; /* Hide all pages by default */
+        }
+        
+        #loginPage, #signupPage, #forgotPasswordPage, #otpPage, #dashboardPage, #editBudgetPage, #managementPage, #aboutPage {
+            display: none;
+        }
+        
+        /* Initially show login page */
+        #loginPage {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="currentColor"/>
+                </svg>
+                Costonomy
+            </div>
+            <nav class="nav">
+                <a href="#" class="nav-link active" onclick="showPage('loginPage')">Login</a>
+                <a href="#" class="nav-link" onclick="showPage('signupPage')">Sign Up</a>
+                <a href="#" class="nav-link" onclick="showPage('dashboardPage')">Dashboard</a>
+                <a href="#" class="nav-link" onclick="showPage('editBudgetPage')">Edit Budget</a>
+                <a href="#" class="nav-link" onclick="showPage('managementPage')">Management Result</a>
+                <a href="#" class="nav-link" onclick="showPage('aboutPage')">About</a>
+            </nav>
+        </header>
+        
+        <div id="app">
+            <!-- Login Page -->
+            <div id="loginPage">
+                <div class="card">
+                    <h2 class="card-title">Login</h2>
+                    <form>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-input" placeholder="Enter your password">
+                        </div>
+                        <button type="button" class="btn" onclick="showPage('dashboardPage')">Login</button>
+                        <div class="form-footer">
+                            <a href="#" onclick="showPage('forgotPasswordPage')">Forgot Password?</a>
+                        </div>
+                        <div class="form-footer">
+                            Don't have an account? <a href="#" onclick="showPage('signupPage')">Sign Up</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Sign Up Page -->
+            <div id="signupPage">
+                <div class="card">
+                    <h2 class="card-title">Sign Up</h2>
+                    <form>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-input" placeholder="Create a password">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Confirm Password</label>
+                            <input type="password" class="form-input" placeholder="Confirm your password">
+                        </div>
+                        <button type="button" class="btn" onclick="showPage('otpPage')">Sign Up</button>
+                        <div class="form-footer">
+                            Already have an account? <a href="#" onclick="showPage('loginPage')">Login</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Forgot Password Page -->
+            <div id="forgotPasswordPage">
+                <div class="card">
+                    <h2 class="card-title">Forgot Password</h2>
+                    <form>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" placeholder="Enter your email">
+                        </div>
+                        <button type="button" class="btn" onclick="showPage('otpPage')">Reset Password</button>
+                        <div class="form-footer">
+                            <a href="#" onclick="showPage('loginPage')">Back to Login</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- OTP Page -->
+            <div id="otpPage">
+                <div class="card">
+                    <h2 class="card-title">OTP Verification</h2>
+                    <p class="text-center">Enter OTP sent to your email</p>
+                    <div class="otp-inputs">
+                        <input type="text" class="otp-input" maxlength="1">
+                        <input type="text" class="otp-input" maxlength="1">
+                        <input type="text" class="otp-input" maxlength="1">
+                        <input type="text" class="otp-input" maxlength="1">
+                    </div>
+                    <button type="button" class="btn" onclick="showPage('dashboardPage')">Verify OTP</button>
+                    <div class="form-footer">
+                        Didn't receive OTP? <a href="#">Resend</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Dashboard Page -->
+            <div id="dashboardPage">
+                <h1>Dashboard</h1>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <a href="#" class="dashboard-btn" onclick="showPage('editBudgetPage')">Edit Budget</a>
+                        <a href="#" class="dashboard-btn" onclick="showPage('managementPage')">View Budget</a>
+                        <a href="#" class="dashboard-btn">About</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Edit Budget Page -->
+            <div id="editBudgetPage">
+                <div class="card card-wide">
+                    <h2 class="card-title">Edit Budget</h2>
+                    <form class="budget-form">
+                        <!-- Row 1 -->
+                        <div class="budget-row">
+                            <label>Category</label>
+                            <input type="text" class="form-input" value="Housing">
+                            <input type="number" class="form-input" value="1500">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <!-- Row 2 -->
+                        <div class="budget-row">
+                            <label>Category</label>
+                            <input type="text" class="form-input" value="Groceries">
+                            <input type="number" class="form-input" value="400">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <!-- Row 3 -->
+                        <div class="budget-row">
+                            <label>Category</label>
+                            <input type="text" class="form-input" value="Transportation">
+                            <input type="number" class="form-input" value="200">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <!-- Row 4 -->
+                        <div class="budget-row">
+                            <label>Category</label>
+                            <input type="text" class="form-input" value="Entertainment">
+                            <input type="number" class="form-input" value="150">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <!-- Row 5 -->
+                        <div class="budget-row">
+                            <label>Category</label>
+                            <input type="text" class="form-input" value="Utilities">
+                            <input type="number" class="form-input" value="250">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <!-- Row 6 -->
+                        <div class="budget-row">
+                            <label>Category</label>
+                            <input type="text" class="form-input" value="Health">
+                            <input type="number" class="form-input" value="300">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <!-- Row 7 -->
+                        <div class="budget-row">
+                            <label>Category</label>
+                            <input type="text" class="form-input" value="Education">
+                            <input type="number" class="form-input" value="200">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <!-- Row 8 -->
+                        <div class="budget-row">
+                            <label>Category</label>
+                            <input type="text" class="form-input" value="Savings">
+                            <input type="number" class="form-input" value="500">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <button type="button" class="btn mt-20" onclick="saveBudget()">Save Budget</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Management Page -->
+            <div id="managementPage">
+                <div class="card card-wide">
+                    <h2 class="card-title">Budget Management</h2>
+                    <div class="tab-container">
+                        <div class="tabs">
+                            <div class="tab active" onclick="switchTab(this, 0)">Chart</div>
+                            <div class="tab" onclick="switchTab(this, 1)">Table</div>
+                        </div>
+                        <div class="tab-content active" id="chartTab">
+                            <div class="chart-container">
+                                <div class="donut-chart" id="budgetChart">
+                                    <!-- SVG Donut Chart will be dynamically generated -->
+                                    <svg id="donutChartSvg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                        <!-- Base circle -->
+                                        <circle cx="50" cy="50" r="40" fill="none" stroke="#e0e0e0" stroke-width="20" />
+                                        <!-- Dynamic segments will be inserted here -->
+                                        <circle cx="50" cy="50" r="25" fill="#ffffff" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <table class="budget-table" id="budgetSummaryTable">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Amount</th>
+                                        <th>Percentage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Table rows will be dynamically generated -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-content" id="tableTab">
+                            <table class="budget-table" id="budgetDetailTable">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Table rows will be dynamically generated -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- About Page -->
+            <div id="aboutPage">
+                <div class="card">
+                    <h2 class="card-title">About</h2>
+                    <div class="text-center">
+                        <svg viewBox="0 0 100 100" width="150" height="150" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50,10 A40,40 0 1,0 50,90 A40,40 0 1,0 50,10 Z" fill="none" stroke="#6a1b9a" stroke-width="4"/>
+                            <path d="M30,50 C30,30 70,30 70,50 C70,70 30,70 30,50 Z" fill="none" stroke="#6a1b9a" stroke-width="4"/>
+                        </svg>
+                    </div>
+                    <p class="text-center mt-20">
+                        Costonomy v1.0.0<br>
+                        A simple tool to manage your personal kost finances
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Budget data storage
+        let budgetData = [
+            { category: "Housing", amount: 1500, enabled: true },
+            { category: "Groceries", amount: 400, enabled: true },
+            { category: "Transportation", amount: 200, enabled: true },
+            { category: "Entertainment", amount: 150, enabled: true },
+            { category: "Utilities", amount: 250, enabled: true },
+            { category: "Health", amount: 300, enabled: true },
+            { category: "Education", amount: 200, enabled: false },
+            { category: "Savings", amount: 500, enabled: true }
+        ];
+        
+        // Colors for the chart
+        const chartColors = [
+            "#9c4dcc", "#6a1b9a", "#38006b", "#9575cd", 
+            "#7e57c2", "#5e35b1", "#ba68c8", "#8e24aa"
+        ];
+        
+        // Show all app content
+        document.getElementById('app').style.display = 'block';
+        
+        // Function to switch between pages
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = ['loginPage', 'signupPage', 'forgotPasswordPage', 'otpPage', 'dashboardPage', 'editBudgetPage', 'managementPage', 'aboutPage'];
+            pages.forEach(page => {
+                document.getElementById(page).style.display = 'none';
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).style.display = 'block';
+            
+            // Update active navigation link
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.textContent.toLowerCase().includes(pageId.replace('Page', '').toLowerCase())) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // If navigating to management page, update the budget visualization
+            if (pageId === 'managementPage') {
+                updateBudgetVisualization();
+            }
+            
+            // If navigating to edit budget page, populate form with current data
+            if (pageId === 'editBudgetPage') {
+                populateBudgetForm();
+            }
+        }
+        
+        // Function to switch between tabs
+        function switchTab(tabElement, tabIndex) {
+            // Update tab active state
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            tabElement.classList.add('active');
+            
+            // Show selected tab content
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+            tabContents[tabIndex].classList.add('active');
+        }
+        
+        // Function to save budget data and redirect to management page
+        function saveBudget() {
+            // Get all budget rows
+            const budgetRows = document.querySelectorAll('.budget-row');
+            
+            // Clear existing budget data
+            budgetData = [];
+            
+            // Extract data from each row
+            budgetRows.forEach((row, index) => {
+                const inputs = row.querySelectorAll('.form-input');
+                const toggle = row.querySelector('input[type="checkbox"]');
+                
+                budgetData.push({
+                    category: inputs[0].value,
+                    amount: parseFloat(inputs[1].value) || 0,
+                    enabled: toggle.checked
+                });
+            });
+            
+            // Navigate to management page
+            showPage('managementPage');
+            
+            // Show success message
+            alert('Budget saved successfully!');
+        }
+        
+        // Function to populate the budget form with current data
+        function populateBudgetForm() {
+            const budgetRows = document.querySelectorAll('.budget-row');
+            
+            budgetData.forEach((item, index) => {
+                if (index < budgetRows.length) {
+                    const inputs = budgetRows[index].querySelectorAll('.form-input');
+                    const toggle = budgetRows[index].querySelector('input[type="checkbox"]');
+                    
+                    inputs[0].value = item.category;
+                    inputs[1].value = item.amount;
+                    toggle.checked = item.enabled;
+                }
+            });
+        }
+        
+        // Function to calculate total and percentages
+        function calculateBudgetStats() {
+            // Filter only enabled categories
+            const enabledBudget = budgetData.filter(item => item.enabled);
+            
+            // Calculate total
+            const total = enabledBudget.reduce((sum, item) => sum + item.amount, 0);
+            
+            // Calculate percentages
+            return enabledBudget.map(item => ({
+                ...item,
+                percentage: Math.round((item.amount / total) * 100)
+            }));
+        }
+        
+        // Function to update the donut chart
+        function updateDonutChart(data) {
+            const svg = document.getElementById('donutChartSvg');
+            
+            // Clear existing segments (except base circle and center)
+            const segments = svg.querySelectorAll('circle:not(:first-child):not(:last-child)');
+            segments.forEach(segment => segment.remove());
+            
+            // Calculate total circumference
+            const circumference = 2 * Math.PI * 40;
+            
+            // Start position
+            let dashStart = 0;
+            
+            // Create segments for each budget category
+            data.forEach((item, index) => {
+                const dashLength = (item.percentage / 100) * circumference;
+                const segment = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                
+                segment.setAttribute("cx", "50");
+                segment.setAttribute("cy", "50");
+                segment.setAttribute("r", "40");
+                segment.setAttribute("fill", "none");
+                segment.setAttribute("stroke", chartColors[index % chartColors.length]);
+                segment.setAttribute("stroke-width", "20");
+                segment.setAttribute("stroke-dasharray", `${dashLength} ${circumference - dashLength}`);
+                segment.setAttribute("transform", `rotate(${-90 + (dashStart / circumference) * 360} 50 50)`);
+                
+                // Insert before the center circle
+                svg.insertBefore(segment, svg.lastElementChild);
+                
+                dashStart += dashLength;
+            });
+        }
+        
+        // Function to update budget tables
+        function updateBudgetTables(data, total) {
+            // Update summary table
+            const summaryTableBody = document.querySelector('#budgetSummaryTable tbody');
+            summaryTableBody.innerHTML = '';
+            
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.category}</td>
+                    <td>${item.amount.toLocaleString()}</td>
+                    <td>${item.percentage}%</td>
+                `;
+                summaryTableBody.appendChild(row);
+            });
+            
+            // Update detail table
+            const detailTableBody = document.querySelector('#budgetDetailTable tbody');
+            detailTableBody.innerHTML = '';
+            
+            budgetData.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.category}</td>
+                    <td>${item.amount.toLocaleString()}</td>
+                    <td>${item.enabled ? 'Active' : 'Inactive'}</td>
+                `;
+                detailTableBody.appendChild(row);
+            });
+        }
+        
+        // Function to update all budget visualizations
+        function updateBudgetVisualization() {
+            // Calculate stats
+            const stats = calculateBudgetStats();
+            const total = stats.reduce((sum, item) => sum + item.amount, 0);
+            
+            // Update chart
+            updateDonutChart(stats);
+            
+            // Update tables
+            updateBudgetTables(stats, total);
+        }
+        
+        // Auto-focus OTP inputs and move to next input
+        const otpInputs = document.querySelectorAll('.otp-input');
+        otpInputs.forEach((input, index) => {
+            input.addEventListener('input', function() {
+                if (this.value.length === 1 && index < otpInputs.length - 1) {
+                    otpInputs[index + 1].focus();
+                }
+            });
+            
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace' && !this.value && index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+            });
+        });
+        
+        // Initialize the budget visualization
+        window.onload = function() {
+            // Initially show login page
+            showPage('loginPage');
+            
+            // Initialize budget data
+            updateBudgetVisualization();
+        };
+    </script>
+</body>
+</html>
